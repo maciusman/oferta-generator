@@ -63,11 +63,8 @@ export default async function handler(req, res) {
     // Zapisz w Vercel KV Store (jeśli dostępne) lub zwróć do zapisania lokalnie
     // Na razie zwracamy dane do zapisania w localStorage przeglądarki
     
-    // Generuj URL do oferty
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}` 
-      : (req.headers.host ? `https://${req.headers.host}` : 'http://localhost:3000');
-    
+    // Generuj URL do oferty - zawsze używaj głównej domeny
+    const baseUrl = 'https://oferta-generator-v2.vercel.app'; // Główna domena Vercel
     const offerUrl = `${baseUrl}/offer.html?id=${offerId}&t=${timestamp}`;
     
     console.log('Wygenerowano link do oferty:', offerUrl);
