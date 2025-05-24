@@ -1,0 +1,28 @@
+{
+  "name": "oferta-generator",
+  "version": "1.0.0",
+  "description": "Generator interaktywnych ofert HTML z Google Docs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step needed'",
+    "start": "echo 'No start step needed for Vercel'"
+  },
+  "keywords": [
+    "oferty",
+    "html",
+    "generator",
+    "google-docs",
+    "bookmarklet",
+    "gemini"
+  ],
+  "author": "Twoje Imię",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
