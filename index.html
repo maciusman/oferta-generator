@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Interaktywnych Ofert HTML</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            scroll-behavior: smooth; 
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .bookmarklet-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .bookmarklet-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-4">
+                <i class="fas fa-magic mr-4"></i>
+                Generator Interaktywnych Ofert HTML
+            </h1>
+            <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                Przekształć swoje oferty z Google Docs w piękne, interaktywne strony HTML jednym kliknięciem. 
+                Udostępniaj je przez publiczne linki i imponuj klientom.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#instalacja" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-purple-50 transition-all">
+                    <i class="fas fa-download mr-2"></i>Zainstaluj Bookmarklet
+                </a>
+                <a href="#instrukcja" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-all">
+                    <i class="fas fa-play mr-2"></i>Zobacz Instrukcję
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-12">Dlaczego Generator Ofert?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Jeden Klik</h3>
+                    <p class="text-slate-600">Przekształć ofertę z Google Docs w interaktywną stronę HTML w sekundach.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-share-alt text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Publiczne Linki</h3>
+                    <p class="text-slate-600">Otrzymuj publiczne linki, które możesz wysłać klientom email lub wstawić na stronę.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-mobile-alt text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Responsywne</h3>
+                    <p class="text-slate-600">Oferty wyglądają świetnie na wszystkich urządzeniach - desktop, tablet, telefon.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation -->
+    <section id="instalacja" class="py-16 bg-slate-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-12">Instalacja Bookmarklet</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-amber-50 border-l-4 border-amber-400 p-6 mb-8 rounded-r-lg">
+                    <div class="flex items-start">
+                        <i class="fas fa-info-circle text-amber-600 mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-semibold text-amber-800 mb-2">Co to jest bookmarklet?</h3>
+                            <p class="text-amber-700 text-sm">
+                                Bookmarklet to zwykła zakładka w przeglądarce, która zamiast otwierania strony, wykonuje kod JavaScript. 
+                                Po dodaniu do zakładek będziesz mógł generować oferty jednym kliknięciem z dowolnego Google Docs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Krok 1 -->
+                    <div class="step-card bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <span class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-3">1</span>
+                            <h3 class="text-xl font-semibold">Dodaj Bookmarklet</h3>
+                        </div>
+                        <p class="text-slate-600 mb-4">Przeciągnij poniższy przycisk do paska zakładek w przeglądarce:</p>
+                        
+                        <div class="text-center bg-slate-50 p-4 rounded-lg">
+                            <a href="javascript:void(0)" id="bookmarkletLink" class="bookmarklet-button" draggable="true">
+                                <i class="fas fa-magic mr-2"></i>Generator Ofert
+                            </a>
+                            <p class="text-xs text-slate-500 mt-2">Przeciągnij ↑ do paska zakładek</p>
+                        </div>
+
+                        <div class="mt-4 text-sm text-slate-500">
+                            <p><strong>Nie widzisz paska zakładek?</strong></p>
+                            <p>Chrome/Edge: Ctrl+Shift+B</p>
+                            <p>Firefox: Ctrl+Shift+B</p>
+                        </div>
+                    </div>
+
+                    <!-- Krok 2 -->
+                    <div class="step-card bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <span class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-3">2</span>
+                            <h3 class="text-xl font-semibold">Skonfiguruj Klucz API</h3>
+                        </div>
+                        <p class="text-slate-600 mb-4">Potrzebujesz klucza API Gemini (darmowy):</p>
+                        
+                        <ol class="text-sm text-slate-600 space-y-2">
+                            <li class="flex items-start">
+                                <span class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center text-xs font-bold mr-2 mt-0.5">1</span>
+                                Idź do <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-blue-600 hover:underline">Google AI Studio</a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center text-xs font-bold mr-2 mt-0.5">2</span>
+                                Kliknij "Create API Key"
+                            </li>
+                            <li class="flex items-start">
+                                <span class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center text-xs font-bold mr-2 mt-0.5">3</span>
+                                Skopiuj klucz
+                            </li>
+                            <li class="flex items-start">
+                                <span class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center text-xs font-bold mr-2 mt-0.5">4</span>
+                                Przy pierwszym użyciu bookmarklet poprosi o klucz
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructions -->
+    <section id="instrukcja" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-12">Jak używać?</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-8">
+                    <!-- Krok 1 -->
+                    <div class="flex items-start space-x-6 p-6 bg-blue-50 rounded-xl">
+                        <div class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-xl">1</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Przygotuj ofertę w Google Docs</h3>
+                            <p class="text-slate-600 mb-2">Napisz ofertę w Google Docs jak zwykle. Generator automatycznie:</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Rozpozna strukturę (nagłówki, listy, sekcje)</li>
+                                <li>• Stworzy nawigację po sekcjach</li>
+                                <li>• Przekształci w interaktywny HTML</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Krok 2 -->
+                    <div class="flex items-start space-x-6 p-6 bg-green-50 rounded-xl">
+                        <div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-xl">2</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Kliknij bookmarklet w Google Docs</h3>
+                            <p class="text-slate-600 mb-2">Gdy masz otwartą ofertę w Google Docs, kliknij na bookmarklet "Generator Ofert" w pasku zakładek.</p>
+                        </div>
+                    </div>
+
+                    <!-- Krok 3 -->
+                    <div class="flex items-start space-x-6 p-6 bg-purple-50 rounded-xl">
+                        <div class="w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-xl">3</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Otrzymaj publiczny link</h3>
+                            <p class="text-slate-600 mb-2">Po kilku sekundach otrzymasz publiczny link do interaktywnej wersji oferty. Link jest ważny przez 7 dni.</p>
+                        </div>
+                    </div>
+
+                    <!-- Krok 4 -->
+                    <div class="flex items-start space-x-6 p-6 bg-amber-50 rounded-xl">
+                        <div class="w-12 h-12 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-xl">4</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Udostępnij klientowi</h3>
+                            <p class="text-slate-600">Wyślij link klientowi email, wstaw na swoją stronę, lub udostępnij w inny sposób. Nie potrzeba żadnych logowań!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 bg-slate-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-12">Często zadawane pytania</h2>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <details class="bg-white p-6 rounded-lg shadow-md">
+                    <summary class="font-semibold text-lg cursor-pointer text-slate-700 hover:text-blue-600">
+                        Czy to jest bezpieczne? Gdzie przechowywane są moje oferty?
+                    </summary>
+                    <p class="mt-3 text-slate-600">
+                        Oferty są tymczasowo przechowywane w Twojej przeglądarce (localStorage) i na naszych serwerach tylko przez 7 dni. 
+                        Twój klucz API Gemini jest przechowywany tylko lokalnie w przeglądarce i nigdy nie jest wysyłany na nasze serwery.
+                    </p>
+                </details>
+
+                <details class="bg-white p-6 rounded-lg shadow-md">
+                    <summary class="font-semibold text-lg cursor-pointer text-slate-700 hover:text-blue-600">
+                        Czy to jest darmowe?
+                    </summary>
+                    <p class="mt-3 text-slate-600">
+                        Generator jest całkowicie darmowy. Jedynym kosztem może być użycie API Gemini, ale ma bardzo duży darmowy limit 
+                        (1500 requestów dziennie), więc dla większości użytkowników będzie całkowicie za darmo.
+                    </p>
+                </details>
+
+                <details class="bg-white p-6 rounded-lg shadow-md">
+                    <summary class="font-semibold text-lg cursor-pointer text-slate-700 hover:text-blue-600">
+                        Jak długo są ważne wygenerowane linki?
+                    </summary>
+                    <p class="mt-3 text-slate-600">
+                        Wygenerowane linki są ważne przez 7 dni od momentu utworzenia. Po tym czasie automatycznie wygasają.
+                    </p>
+                </details>
+
+                <details class="bg-white p-6 rounded-lg shadow-md">
+                    <summary class="font-semibold text-lg cursor-pointer text-slate-700 hover:text-blue-600">
+                        Czy mogę udostępnić bookmarklet zespołowi?
+                    </summary>
+                    <p class="mt-3 text-slate-600">
+                        Tak! Wystarczy że wyślesz kolegom link do tej strony. Każdy będzie mógł dodać bookmarklet do swojej przeglądarki 
+                        i używać ze swoim własnym kluczem API Gemini.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-300 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; <span id="currentYear"></span> Generator Interaktywnych Ofert HTML. Projekt open-source.</p>
+            <p class="text-sm mt-2">Wspierane przez Gemini AI i Tailwind CSS</p>
+        </div>
+    </footer>
+
+    <script src="bookmarklet.js"></script>
+    <script>
+        // Ustaw aktualny rok
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Załaduj kod bookmarklet i ustaw href
+        document.addEventListener('DOMContentLoaded', function() {
+            // Kod bookmarklet będzie załadowany z bookmarklet.js
+            if (window.bookmarkletCode) {
+                document.getElementById('bookmarkletLink').href = 'javascript:' + encodeURIComponent(window.bookmarkletCode);
+            }
+        });
+    </script>
+</body>
+</html>
