@@ -108,7 +108,69 @@
                 <!-- Generate Button -->
                 <div class="text-center">
                     <button id="generateBtn" 
-                            class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-12<!DOCTYPE html>
+                            class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-12 py-4 rounded-lg text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-magic mr-3"></i>
+                        Generuj Interaktywną Ofertę
+                    </button>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loadingState" class="hidden text-center py-8">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <h3 class="text-xl font-semibold text-slate-700 mb-2">Generowanie oferty...</h3>
+                    <p id="loadingText" class="text-slate-500">Wysyłanie do AI...</p>
+                </div>
+
+                <!-- Success State -->
+                <div id="successState" class="hidden">
+                    <div class="bg-green-50 border-l-4 border-green-400 p-6 rounded-r-lg">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-check-circle text-green-500 text-2xl mr-3"></i>
+                            <h3 class="text-lg font-semibold text-green-800">Oferta gotowa!</h3>
+                        </div>
+                        <p class="text-green-700 mb-4">Link jest ważny przez 7 dni:</p>
+                        <div class="bg-white p-4 rounded-lg border border-green-200 mb-4">
+                            <a id="generatedLink" href="#" target="_blank" 
+                               class="text-blue-600 hover:text-blue-800 font-medium break-all"></a>
+                        </div>
+                        <div class="flex gap-3">
+                            <button id="copyLinkBtn" 
+                                    class="flex-1 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                                <i class="fas fa-copy mr-2"></i>Kopiuj Link
+                            </button>
+                            <button id="openLinkBtn" 
+                                    class="flex-1 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                                <i class="fas fa-external-link-alt mr-2"></i>Otwórz Ofertę
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error State -->
+                <div id="errorState" class="hidden">
+                    <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded-r-lg">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-exclamation-triangle text-red-500 text-2xl mr-3"></i>
+                            <h3 class="text-lg font-semibold text-red-800">Wystąpił błąd</h3>
+                        </div>
+                        <p id="errorMessage" class="text-red-700 mb-4"></p>
+                        <button id="retryBtn" 
+                                class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                            <i class="fas fa-redo mr-2"></i>Spróbuj ponownie
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-12">Alternatywnie: Bookmarklet</h2>
+            <p class="text-center text-slate-600 mb-8">
+                Dla jeszcze większej wygody możesz zainstalować bookmarklet, który automatycznie pobierze treść z Google Docs:
+            </p><!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -389,6 +451,138 @@
     <script>
         // Ustaw aktualny rok
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Załaduj zapisane ustawienia
+        const savedApiKey = localStorage.getItem('gemini_api_key');
+        const savedModel = localStorage.getItem('gemini_model') || 'gemini-2.5-flash-preview-04-17';
+        
+        if (savedApiKey) {
+            document.getElementById('apiKey').value = savedApiKey;
+        }
+        document.getElementById('modelSelect').value = savedModel;
+
+        // Obsługa formularza
+        const generateBtn = document.getElementById('generateBtn');
+        const loadingState = document.getElementById('loadingState');
+        const successState = document.getElementById('successState');
+        const errorState = document.getElementById('errorState');
+        const loadingText = document.getElementById('loadingText');
+        const errorMessage = document.getElementById('errorMessage');
+        const generatedLink = document.getElementById('generatedLink');
+        const copyLinkBtn = document.getElementById('copyLinkBtn');
+        const openLinkBtn = document.getElementById('openLinkBtn');
+        const retryBtn = document.getElementById('retryBtn');
+
+        function showState(state) {
+            document.querySelector('.bg-white.p-8.rounded-xl.shadow-lg > div:nth-child(4)').style.display = state === 'form' ? 'block' : 'none';
+            loadingState.classList.toggle('hidden', state !== 'loading');
+            successState.classList.toggle('hidden', state !== 'success');
+            errorState.classList.toggle('hidden', state !== 'error');
+            generateBtn.style.display = state === 'form' ? 'block' : 'none';
+        }
+
+        async function generateOffer() {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const model = document.getElementById('modelSelect').value;
+            const offerText = document.getElementById('offerText').value.trim();
+
+            if (!apiKey) {
+                alert('Proszę wprowadzić klucz API Gemini');
+                return;
+            }
+
+            if (!offerText || offerText.length < 50) {
+                alert('Proszę wkleić treść oferty (minimum 50 znaków)');
+                return;
+            }
+
+            // Zapisz ustawienia
+            localStorage.setItem('gemini_api_key', apiKey);
+            localStorage.setItem('gemini_model', model);
+
+            showState('loading');
+            loadingText.textContent = 'Wysyłanie do AI...';
+
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        documentText: offerText,
+                        apiKey: apiKey,
+                        modelName: model
+                    })
+                });
+
+                const responseText = await response.text();
+                console.log('Response status:', response.status);
+                console.log('Response text:', responseText);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${responseText}`);
+                }
+
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch (parseError) {
+                    throw new Error(`Serwer zwrócił nieprawidłową odpowiedź: ${responseText.substring(0, 200)}`);
+                }
+
+                if (!result.success) {
+                    throw new Error(result.error || 'Błąd API');
+                }
+
+                // Zapisz dane oferty w localStorage
+                if (result.offerData && result.offerId) {
+                    const storageKey = `offer_${result.offerId}`;
+                    localStorage.setItem(storageKey, JSON.stringify(result.offerData));
+                }
+
+                // Pokaż sukces
+                generatedLink.href = result.url;
+                generatedLink.textContent = result.url;
+                showState('success');
+
+            } catch (error) {
+                console.error('Błąd:', error);
+                errorMessage.textContent = error.message || 'Wystąpił nieoczekiwany błąd';
+                showState('error');
+            }
+        }
+
+        // Event listeners
+        generateBtn.addEventListener('click', generateOffer);
+        retryBtn.addEventListener('click', () => showState('form'));
+
+        copyLinkBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(generatedLink.href);
+                copyLinkBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Skopiowano!';
+                setTimeout(() => {
+                    copyLinkBtn.innerHTML = '<i class="fas fa-copy mr-2"></i>Kopiuj Link';
+                }, 2000);
+            } catch (error) {
+                // Fallback
+                const textArea = document.createElement('textarea');
+                textArea.value = generatedLink.href;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                copyLinkBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Skopiowano!';
+                setTimeout(() => {
+                    copyLinkBtn.innerHTML = '<i class="fas fa-copy mr-2"></i>Kopiuj Link';
+                }, 2000);
+            }
+        });
+
+        openLinkBtn.addEventListener('click', () => {
+            window.open(generatedLink.href, '_blank');
+        });
     </script>
 </body>
 </html>
